@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
 import { AddressBook } from '../api/links.js'
-import { AddressListItem } from './AddressListItem.jsx'
+import AddressListItem  from './AddressListItem'
 //import { Info } from './Info.jsx';
 export const AddressList = () => {
   let Listfinder = useTracker(() => AddressBook.find({}, {limit:10, sort:{name:1}}).fetch())
@@ -51,19 +51,7 @@ export const AddressList = () => {
         </thead>
         <tbody>
         {Listfinder.map((data,index) => 
-            <tr key = {data._id} id = {data._id}>
-            <td name = 'targetName'>{data.name}</td>
-            <td name = 'targetPhone'>{data.phone}</td>
-            <td name = 'targetEmail'>{data.email}</td>
-            <td name = 'targetCompany'>{data.company}</td>
-            <td name = 'targetBirthday'>{data.birthday}</td>
-            <td>
-            <button className='btn btn-warning btn-sm' name='remove' onClick={() => deleteAddress(data)}>
-            <i className='glyphicon glyphicon-trash'></i> 삭제</button>
-            <button className='btn btn-warning btn-sm' name='modify'>
-            <i className='glyphicon glyphicon-wrench'></i> 수정</button> {/* 토글을 구현하면 나머지는 일사천리일텐데... */}
-            </td>
-        </tr>
+         <AddressListItem key={data._id} data = {data}/>
         )}
         </tbody>
       </table>
