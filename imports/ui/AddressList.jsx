@@ -51,7 +51,19 @@ export const AddressList = () => {
         </thead>
         <tbody>
         {Listfinder.map((data,index) => 
-           <AddressListItem data={'data'}/>
+            <tr key = {data._id} id = {data._id}>
+            <td name = 'targetName'>{data.name}</td>
+            <td name = 'targetPhone'>{data.phone}</td>
+            <td name = 'targetEmail'>{data.email}</td>
+            <td name = 'targetCompany'>{data.company}</td>
+            <td name = 'targetBirthday'>{data.birthday}</td>
+            <td>
+            <button className='btn btn-warning btn-sm' name='remove' onClick={() => deleteAddress(data)}>
+            <i className='glyphicon glyphicon-trash'></i> 삭제</button>
+            <button className='btn btn-warning btn-sm' name='modify'>
+            <i className='glyphicon glyphicon-wrench'></i> 수정</button> {/* 토글을 구현하면 나머지는 일사천리일텐데... */}
+            </td>
+        </tr>
         )}
         </tbody>
       </table>
