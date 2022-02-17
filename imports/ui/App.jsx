@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
-import { AddressBook } from '../api/links.js'
-import { InsertAddress } from './InsertAddress.jsx';
-import { AddressList } from './AddressList.jsx';
-//import { Info } from './Info.jsx';
+import { InsertAddress } from './InsertAddress';
+import { AddressList } from './AddressList';
+import { LoginForm } from './LoginForm';
+
 export const App = () => {
+  const userLogin = useTracker(() => Meteor.user());
+  const logout = () => Meteor.logout();
   return(
     <>
-      <InsertAddress />
-      <AddressList />
+        {userLogin ? 
+          <>
+            <div className="user" onClick={logout}> 
+            {userLogin.username} 사용자 이름을 누를시 로그아웃됩니다
+            </div>
+            <InsertAddress />
+            <AddressList/>
+          </>
+        :
+        <LoginForm />
+        }
     </>
   )
 }
