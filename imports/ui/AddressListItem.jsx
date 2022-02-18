@@ -5,7 +5,6 @@ import {NotEmptyString, EmailString, PhoneStirng, BirthdayString } from '../api/
 
 const addressListItem = ({data}) => {
     const [modify, setModify] = useState(true);
-
     const deleteAddress = (_id) => AddressBook.remove(_id);
 
     const [userInfo, setUserInfo] = useState({ //기본 값
