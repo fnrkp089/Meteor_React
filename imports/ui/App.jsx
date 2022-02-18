@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTracker } from 'meteor/react-meteor-data';
 import { InsertAddress } from './InsertAddress';
 import { AddressList } from './AddressList';

@@ -1,13 +1,22 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTracker, withTracker } from 'meteor/react-meteor-data';
 import { AddressBook } from '../api/links'
-import AddressListItem  from './AddressListItem.jsx'
+import AddressListItem  from './AddressListItem'
 //import { Info } from './Info.jsx';
 
 export const AddressList = () => {
-  const[count, setCount] = useState(30)
-  Meteor.subscribe('AddressBookData', count); //구독
-  let Listfinder = useTracker(() => AddressBook.find({}, {sort:{name:1}}).fetch())
+  const[count, setCount] = useState(10)
+  const listLoading = (num) => useTracker(() => {
+    const handler = Meteor.subscribe('AddressBookData', num); //구독
+    let listFinder =  AddressBook.find().fetch()
+    console.log(listFinder)
+    return {
+      isLoading: !handler.ready(),
+      listFinder: listFinder
+    }
+  });
+  
+  const {isLoading, listFinder} = listLoading(count);
   let datalimit = AddressBook.find().count()
 
   // $(window).scroll(function(){
@@ -42,9 +51,6 @@ export const AddressList = () => {
 
   const moreAddress = () => {
     if(count >= 300){
-      console.log(datalimit)
-      console.log(count)
-      console.log('데이터 초과.')
       return;
     }
     setCount(count => count+30)
@@ -65,9 +71,15 @@ export const AddressList = () => {
           </tr>
         </thead>
         <tbody>
-        {Listfinder.map((data,index) => 
-         <AddressListItem key={data._id} data = {data}/>
-        )}
+        { 
+        isLoading 
+        ?
+        <tr></tr>
+        : 
+         listFinder.map( data => 
+         <AddressListItem key={data._id} data = {data}/>)
+         
+        }
         </tbody>
       </table>
     <div align="center">

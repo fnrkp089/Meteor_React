@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { AddressBook } from '../api/links.js'
+import { check } from 'meteor/check'
 import {NotEmptyString, EmailString, PhoneStirng, BirthdayString } from '../api/checkPatterns'
 export const InsertAddress = () => {
   const [userAddress, setUserAddress] = useState({
