@@ -7,6 +7,7 @@ import { LoginForm } from './LoginForm';
 export const App = () => {
   const userLogin = useTracker(() => Meteor.user());
   const logout = () => Meteor.logout();
+  console.log('호출되었습니다')
   return(
     <>
         {userLogin ? 

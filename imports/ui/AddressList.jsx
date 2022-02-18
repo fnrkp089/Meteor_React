@@ -39,8 +39,8 @@ export const AddressList = () => {
     let clientHeight = document.documentElement.clientHeight;//스크롤바의 공간을 제외한 부분 (clientHeight), 눈에 보이는 만큼의 높이를 구한다.
 
     if (scrollTop + clientHeight == scrollHeight) {
-      setCount(count => count + 30)
-      console.log(count)
+      //setCount(count + 30)
+      //console.log(count)
     }
   }
   // const targetSector = document.getElementsByName('more');
@@ -50,10 +50,11 @@ export const AddressList = () => {
   // observer.observe(targetSector)
 
   const moreAddress = () => {
+    console.log('---')
     if(count >= 300){
       return;
     }
-    setCount(count => count+30)
+    setCount(count+30)
   }
 
   return(
