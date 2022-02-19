@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useTracker, withTracker } from 'meteor/react-meteor-data';
 import { AddressBook } from '../api/links'
 import AddressListItem  from './AddressListItem'
-//import { Info } from './Info.jsx';
 
 export const AddressList = () => {
   const[count, setCount] = useState(10)
@@ -40,15 +39,10 @@ export const AddressList = () => {
     let clientHeight = document.documentElement.clientHeight;//스크롤바의 공간을 제외한 부분 (clientHeight), 눈에 보이는 만큼의 높이를 구한다.
 
     if (scrollTop + clientHeight == scrollHeight) {
-      //setCount(count + 30)
-      //console.log(count)
+      setCount(count + 30)
+      console.log(count)
     }
   }
-  // const targetSector = document.getElementsByName('more');
-  // const observer = new IntersectionObserver(entries => {
-  //   console.log(entries)
-  // })
-  // observer.observe(targetSector)
 
   const moreAddress = () => {
     console.log('---')
