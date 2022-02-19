@@ -6,18 +6,19 @@ import AddressListItem  from './AddressListItem'
 
 export const AddressList = () => {
   const[count, setCount] = useState(10)
+  let limit = AddressBook.find({}).count();
+  
   const listLoading = (num) => useTracker(() => {
-    const handler = Meteor.subscribe('AddressBookData', num); //구독
-    let listFinder =  AddressBook.find().fetch()
+    let helper = Meteor.subscribe('AddressBookData');
+    let listFinder = AddressBook.find({},{limit: num}).fetch()
     console.log(listFinder)
     return {
-      isLoading: !handler.ready(),
+      isLoading : !helper.ready(),
       listFinder: listFinder
     }
   });
   
   const {isLoading, listFinder} = listLoading(count);
-  let datalimit = AddressBook.find().count()
 
   // $(window).scroll(function(){
   //   let scrollHeight = $(window).scrollTop()+$(window).height();
@@ -51,7 +52,8 @@ export const AddressList = () => {
 
   const moreAddress = () => {
     console.log('---')
-    if(count >= 300){
+    if(count >= limit){
+      console.log('페이지 한계 초과')
       return;
     }
     setCount(count+30)
@@ -72,14 +74,12 @@ export const AddressList = () => {
           </tr>
         </thead>
         <tbody>
-        { 
-        isLoading 
-        ?
-        <tr></tr>
-        : 
+        { isLoading 
+        ? 
+        <tr><td>LODAING</td></tr>
+        :
          listFinder.map( data => 
          <AddressListItem key={data._id} data = {data}/>)
-         
         }
         </tbody>
       </table>
