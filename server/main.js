@@ -6,7 +6,6 @@ import {Accounts} from 'meteor/accounts-base';
 import '../imports/api/listPublication'
 
 Meteor.startup(() => {
- 
 });
 
 Meteor.methods({ //회원가입용 미티어 메소드
